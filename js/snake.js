@@ -26,7 +26,7 @@ function onLoad() {
 
     function createSnake () {
 //        added position for snake
-        for ( var i = 0; i <= 5; i++ ) {
+        for ( var i = 5; i >= 0; i-- ) {
             snakeArea.push({
                 x : i,
                 y : 0
@@ -48,9 +48,9 @@ function onLoad() {
 
         drawContainer();
 
-        changeSnakePosition();
-
         drawSnake();
+
+        changeSnakePosition();
 
         setTimeout(function() {
             paint();
@@ -70,7 +70,8 @@ function onLoad() {
         var head = {},
             tail;
 
-        head = snakeArea[0];
+        head.x = snakeArea[0].x;
+        head.y = snakeArea[0].y;
 
         switch ( direction ) {
             case 'left':
@@ -86,7 +87,6 @@ function onLoad() {
                 head.y--;
                 break;
         }
-
 
         tail = snakeArea.pop();
 
