@@ -1,16 +1,23 @@
 
 //call only on load page
 function onLoad() {
+    var
+        canvas = document.getElementById( 'snakeId'),
+        ctx = canvas.getContext( '2d'),
+        h = canvas.height,
+        w = canvas.width;
 
-    //get canvas element
-    var canvas = document.getElementById( 'snakeId' );
+    function init () {
+        drawContainer();
+    }
 
-    //get 2d context
-    var ctx = canvas.getContext( '2d' );
+    function drawContainer () {
+        ctx.fillStyle = 'white';
+        ctx.fillRect( 0, 0, w, h );
 
-    //get size for canvas
-    var h = canvas.height;
-    var w = canvas.width;
+        ctx.strokeStyle = 'black';
+        ctx.strokeRect( 0, 0, w, h );
+    }
 
-
+    init();
 }
