@@ -19,11 +19,7 @@ function onLoad() {
     }
 
     function drawContainer () {
-        ctx.fillStyle = 'white';
-        ctx.fillRect( 0, 0, w, h );
-
-        ctx.strokeStyle = 'black';
-        ctx.strokeRect( 0, 0, w, h );
+        draw_( 'white', 'black', 0, 0, w, h );
     }
 
     function createSnake () {
@@ -44,13 +40,17 @@ function onLoad() {
             var xPos = item.x * snakeSize,
                 yPos = item.y * snakeSize;
 
-            ctx.fillStyle = 'blue';
-            ctx.fillRect( xPos, yPos, snakeSize, snakeSize );
-
-            ctx.strokeStyle = 'white';
-            ctx.strokeRect( xPos, yPos, snakeSize, snakeSize );
+            draw_( 'blue', 'white', xPos, yPos, snakeSize, snakeSize );
         })
 
+    }
+
+    function draw_ ( fillStyle, strokeStyle, xPos, yPos, w, h ) {
+        ctx.fillStyle = fillStyle;
+        ctx.fillRect( xPos, yPos, w, h );
+
+        ctx.strokeStyle = strokeStyle;
+        ctx.strokeRect( xPos, yPos, w, h );
     }
 
     init();
