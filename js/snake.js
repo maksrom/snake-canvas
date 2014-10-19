@@ -4,13 +4,16 @@ function onLoad() {
     var
         snakeArea = [],
         snakeSize = 10,
+        fps = 25,
 
         canvas = document.getElementById( 'snakeId'),
         ctx = canvas.getContext( '2d'),
         h = canvas.height,
         w = canvas.width;
 
-    function init () {
+
+    /************************ public ************************/
+     function init () {
         drawContainer();
 
         createSnake();
@@ -41,11 +44,21 @@ function onLoad() {
                 yPos = item.y * snakeSize;
 
             draw_( 'blue', 'white', xPos, yPos, snakeSize, snakeSize );
-        })
+        });
+    }
+
+    function paint() {
+
+        setTimeout(function() {
+
+            paint();
+
+        }, 1000 / fps)
 
     }
 
-    function draw_ ( fillStyle, strokeStyle, xPos, yPos, w, h ) {
+    /********************** private **********************/
+     function draw_ ( fillStyle, strokeStyle, xPos, yPos, w, h ) {
         ctx.fillStyle = fillStyle;
         ctx.fillRect( xPos, yPos, w, h );
 
@@ -53,5 +66,9 @@ function onLoad() {
         ctx.strokeRect( xPos, yPos, w, h );
     }
 
+
+
     init();
+    paint();
+
 }
