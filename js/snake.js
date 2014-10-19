@@ -13,12 +13,8 @@ function onLoad() {
 
 
     /************************ public ************************/
-     function init () {
-        drawContainer();
-
+    function init () {
         createSnake();
-
-        drawSnake();
     }
 
     function drawContainer () {
@@ -26,7 +22,6 @@ function onLoad() {
     }
 
     function createSnake () {
-
 //        added position for snake
         for ( var i = 0; i <= 5; i++ ) {
             snakeArea.push({
@@ -34,7 +29,6 @@ function onLoad() {
                 y : 0
             })
         }
-
     }
 
     function drawSnake () {
@@ -48,13 +42,15 @@ function onLoad() {
     }
 
     function paint() {
+        changeSnakePosition();
+
+        drawContainer();
+
+        drawSnake();
 
         setTimeout(function() {
-
             paint();
-
         }, 1000 / fps)
-
     }
 
     /********************** private **********************/
@@ -66,9 +62,20 @@ function onLoad() {
         ctx.strokeRect( xPos, yPos, w, h );
     }
 
+    function changeSnakePosition() {
+        var head = {},
+            tail;
 
+        head = snakeArea[0];
 
+        head.x++;
+
+        tail = snakeArea.pop();
+        tail.x = head.x;
+        snakeArea.unshift( tail );
+    }
+
+    /********************** START **********************/
     init();
     paint();
-
 }
