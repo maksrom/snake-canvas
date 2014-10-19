@@ -17,6 +17,7 @@ function onLoad() {
     /************************ public ************************/
     function init () {
         createSnake();
+        createFood();
         createKeyboardController_();
     }
 
@@ -31,6 +32,13 @@ function onLoad() {
                 x : i,
                 y : 0
             })
+        }
+    }
+
+    function createFood () {
+        return {
+            x : Math.round( Math.random() * ( w - snakeSize ) / snakeSize ),
+            y : Math.round( Math.random() * ( w - snakeSize ) / snakeSize )
         }
     }
 
