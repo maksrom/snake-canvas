@@ -7,6 +7,7 @@ function onLoad() {
         snakeArea = [],
         snakeSize = 10,
         fps = 10,
+        food = {},
 
         canvas = document.getElementById( 'snakeId'),
         ctx = canvas.getContext( '2d'),
@@ -36,9 +37,9 @@ function onLoad() {
     }
 
     function createFood () {
-        return {
+        food = {
             x : Math.round( Math.random() * ( w - snakeSize ) / snakeSize ),
-            y : Math.round( Math.random() * ( w - snakeSize ) / snakeSize )
+            y : Math.round( Math.random() * ( h - snakeSize ) / snakeSize )
         }
     }
 
@@ -52,11 +53,17 @@ function onLoad() {
         });
     }
 
+    function drawFood() {
+
+        draw_( 'orange', 'white', food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize );
+    }
+
     function paint() {
 
         drawContainer();
 
         drawSnake();
+        drawFood();
 
         changeSnakePosition();
 
@@ -76,7 +83,7 @@ function onLoad() {
 
     function changeSnakePosition() {
         var head = {},
-            tail;
+            tail = {};
 
         head.x = snakeArea[0].x;
         head.y = snakeArea[0].y;
@@ -96,7 +103,14 @@ function onLoad() {
                 break;
         }
 
-        tail = snakeArea.pop();
+        //eat food
+        if ( head.x === food.x && head.y === food.y ) {
+
+            createFood();
+
+        } else {
+            tail = snakeArea.pop();
+        }
 
         tail.x = head.x;
         tail.y = head.y;
