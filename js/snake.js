@@ -2,9 +2,11 @@
 //call only on load page
 function onLoad() {
     var
+        direction = 'right',
+
         snakeArea = [],
         snakeSize = 10,
-        fps = 25,
+        fps = 10,
 
         canvas = document.getElementById( 'snakeId'),
         ctx = canvas.getContext( '2d'),
@@ -15,6 +17,7 @@ function onLoad() {
     /************************ public ************************/
     function init () {
         createSnake();
+        createKeyboardController_();
     }
 
     function drawContainer () {
@@ -42,9 +45,10 @@ function onLoad() {
     }
 
     function paint() {
-        changeSnakePosition();
 
         drawContainer();
+
+        changeSnakePosition();
 
         drawSnake();
 
@@ -68,11 +72,50 @@ function onLoad() {
 
         head = snakeArea[0];
 
-        head.x++;
+        switch ( direction ) {
+            case 'left':
+                head.x--;
+                break;
+            case 'right':
+                head.x++;
+                break;
+            case 'up':
+                head.y++;
+                break;
+            case 'down':
+                head.y--;
+                break;
+        }
+
 
         tail = snakeArea.pop();
+
         tail.x = head.x;
+        tail.y = head.y;
+
         snakeArea.unshift( tail );
+    }
+
+    function createKeyboardController_() {
+        document.onkeydown = function ( event ) {
+
+            //key number
+            switch ( event.which ) {
+                case 37:
+                    if ( direction !== 'right')  direction = 'left';
+                    break;
+                case 40:
+                    if ( direction !== 'down')   direction = 'up';
+                    break;
+                case 39:
+                    if ( direction !== 'left')   direction = 'right';
+                    break;
+                case 38:
+                    if ( direction !== 'up')     direction = 'down';
+                    break;
+            }
+
+        }
     }
 
     /********************** START **********************/
